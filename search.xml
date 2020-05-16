@@ -4,7 +4,7 @@
     <title>高并发——epoll反应堆模型</title>
     <url>/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p>=========================================================<br>下面代码实现的思想：epoll反应堆模型：（ libevent 网络编程开源库 核心思想）</p>
-<p>1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――</p>
+<p>1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――<a id="more"></a></p>
 <p>　　返回满足监听事件的fd的总个数 ―― 传出参数 events数组 ―― 内部元素 ――满足对应监听事件的fd</p>
 <p>　　―― 判断对应事件 ―― Accept、Read。――循环 epoll_wait 监听</p>
 <p>2.　　epoll反应堆模型： 创建红黑树 ―― 添加监听结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ―― 将结点从树上摘下</p>

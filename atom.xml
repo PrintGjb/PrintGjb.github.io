@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://printgjb.github.io/"/>
-  <updated>2020-05-16T09:20:34.258Z</updated>
+  <updated>2020-05-16T10:27:49.840Z</updated>
   <id>http://printgjb.github.io/</id>
   
   <author>
@@ -21,18 +21,12 @@
     <link href="http://printgjb.github.io/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/"/>
     <id>http://printgjb.github.io/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/</id>
     <published>2020-05-16T09:18:59.000Z</published>
-    <updated>2020-05-16T09:20:34.258Z</updated>
+    <updated>2020-05-16T10:27:49.840Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;=========================================================&lt;br&gt;下面代码实现的思想：epoll反应堆模型：（ libevent 网络编程开源库 核心思想）&lt;/p&gt;
-&lt;p&gt;1.　　普通多路IO转接服务器： 红黑树
-        
-      
+      &lt;p&gt;=========================================================&lt;br&gt;下面代码实现的思想：epoll反应堆模型：（ libevent 网络编程开源库 核心思想）&lt;/p&gt;
+&lt;p&gt;1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――
     
     </summary>
     
