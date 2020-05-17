@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-16T10:27:49.840Z</updated>
+  <updated>2020-05-17T06:55:21.858Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>install_notepad_visimulator</title>
+    <link href="http://yoursite.com/2020/05/17/install-notepad-visimulator/"/>
+    <id>http://yoursite.com/2020/05/17/install-notepad-visimulator/</id>
+    <published>2020-05-17T06:54:19.000Z</published>
+    <updated>2020-05-17T06:55:21.858Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本篇博客仅以记录一个vim党的高兴心情&lt;/p&gt;
+&lt;p&gt;这段时间一直在学assembly，vim对于assembly的语法高亮十分不友好，被迫下只能使用notepad++但是notepad的操作有点让vim党十分不适，笔者在这里准备了&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="汇编" scheme="http://yoursite.com/tags/%E6%B1%87%E7%BC%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>原码 补码 反码 详解</title>
+    <link href="http://yoursite.com/2020/05/17/two-s-complement-representation/"/>
+    <id>http://yoursite.com/2020/05/17/two-s-complement-representation/</id>
+    <published>2020-05-17T06:49:12.000Z</published>
+    <updated>2020-05-17T06:53:09.403Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;[toc]&lt;/p&gt;
+&lt;p&gt;被汇编逼着来学习一波原码反码补码【/捂脸】&lt;/p&gt;
+&lt;p&gt;在学习源码 反码 补码之前我们先来了解一下什么是机器数和真值&lt;/p&gt;
+&lt;h4 id=&quot;机器数&quot;&gt;&lt;a href=&quot;#机器数&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="计算机基础" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="汇编" scheme="http://yoursite.com/tags/%E6%B1%87%E7%BC%96/"/>
+    
+      <category term="计算机基础" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>高并发——epoll反应堆模型</title>
