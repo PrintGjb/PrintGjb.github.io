@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>高并发——epoll反应堆模型</title>
-    <url>/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/</url>
+    <url>/2020/05/16/epoll/</url>
     <content><![CDATA[<p>=========================================================<br>下面代码实现的思想：epoll反应堆模型：（ libevent 网络编程开源库 核心思想）</p>
 <p>1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――<a id="more"></a></p>
 <p>　　返回满足监听事件的fd的总个数 ―― 传出参数 events数组 ―― 内部元素 ――满足对应监听事件的fd</p>
@@ -19,15 +19,5 @@
         <tag>Linxu</tag>
         <tag>网络编程</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>wxcnb</title>
-    <url>/2020/05/17/wxcnb/</url>
-    <content><![CDATA[<p>dfadfasdfsdf</p>
-<p>fasd</p>
-<p>f</p>
-<p>ads</p>
-<p>f</p>
-<object type="application/x-shockwave-flash" style="outline:none;" data="![img](file:///C:\Users\toothurt\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)http://cdn.abowman.com/widgets/hamster/hamster.swf?" width="300" height="225"><param name="movie" value="![img](file:///C:\Users\toothurt\AppData\Roaming\Tencent\QQTempSys\%W@GJ$ACOF(TYDYECOKVDYB.png)http://cdn.abowman.com/widgets/hamster/hamster.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param></object>]]></content>
   </entry>
 </search>

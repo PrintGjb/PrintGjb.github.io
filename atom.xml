@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-17T02:36:52.333Z</updated>
+  <updated>2020-05-16T10:27:49.840Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,37 +17,9 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>wxcnb</title>
-    <link href="http://yoursite.com/2020/05/17/wxcnb/"/>
-    <id>http://yoursite.com/2020/05/17/wxcnb/</id>
-    <published>2020-05-17T02:27:01.000Z</published>
-    <updated>2020-05-17T02:36:52.333Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;dfadfasdfsdf&lt;/p&gt;
-&lt;p&gt;fasd&lt;/p&gt;
-&lt;p&gt;f&lt;/p&gt;
-&lt;p&gt;ads&lt;/p&gt;
-&lt;p&gt;f&lt;/p&gt;
-&lt;object type=&quot;application/x-shockwave-flash&quot; style=&quot;outline:none;&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>高并发——epoll反应堆模型</title>
-    <link href="http://yoursite.com/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://yoursite.com/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/</id>
+    <link href="http://yoursite.com/2020/05/16/epoll/"/>
+    <id>http://yoursite.com/2020/05/16/epoll/</id>
     <published>2020-05-16T09:18:59.000Z</published>
     <updated>2020-05-16T10:27:49.840Z</updated>
     
