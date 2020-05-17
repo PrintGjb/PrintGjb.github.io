@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-17T06:55:21.858Z</updated>
+  <updated>2020-05-17T06:57:48.739Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>install_notepad_visimulator</title>
+    <title>超简单的notepad++使用vim插件方法</title>
     <link href="http://yoursite.com/2020/05/17/install-notepad-visimulator/"/>
     <id>http://yoursite.com/2020/05/17/install-notepad-visimulator/</id>
     <published>2020-05-17T06:54:19.000Z</published>
-    <updated>2020-05-17T06:55:21.858Z</updated>
+    <updated>2020-05-17T06:57:48.739Z</updated>
     
     <summary type="html">
     

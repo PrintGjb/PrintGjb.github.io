@@ -21,7 +21,7 @@
       </tags>
   </entry>
   <entry>
-    <title>install_notepad_visimulator</title>
+    <title>超简单的notepad++使用vim插件方法</title>
     <url>/2020/05/17/install-notepad-visimulator/</url>
     <content><![CDATA[<p>本篇博客仅以记录一个vim党的高兴心情</p>
 <p>这段时间一直在学assembly，vim对于assembly的语法高亮十分不友好，被迫下只能使用notepad++但是notepad的操作有点让vim党十分不适，笔者在这里准备了<a href="https://pan.baidu.com/s/1iRQgR6iyPe_HiuMD9JXpSQ" target="_blank" rel="noopener">离线安装包</a>（提取码：bady）</p>
