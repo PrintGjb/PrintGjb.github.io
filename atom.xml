@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-17T07:15:10.743Z</updated>
+  <updated>2020-05-17T14:27:11.378Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>目录和文件的权限</title>
+    <link href="http://yoursite.com/2020/05/17/linux-mode/"/>
+    <id>http://yoursite.com/2020/05/17/linux-mode/</id>
+    <published>2020-05-17T12:44:45.000Z</published>
+    <updated>2020-05-17T14:27:11.378Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;文件的权限&quot;&gt;&lt;a href=&quot;#文件的权限&quot; class=&quot;headerlink&quot; title=&quot;文件的权限&quot;&gt;&lt;/a&gt;文件的权限&lt;/h2&gt;&lt;p&gt;对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode
+        
+      
+    
+    </summary>
+    
+    
+      <category term="系统编程" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="系统编程" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>超简单的notepad++使用vim插件方法</title>
