@@ -80,7 +80,7 @@
   <entry>
     <title>目录和文件的权限</title>
     <url>/2020/05/17/linux-mode/</url>
-    <content><![CDATA[<h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）均有访问权限，对于只有普通文件才有访问权限这样的认知是错误的，对于每一个文件共有九种权限</p>
+    <content><![CDATA[<h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）<a id="more"></a>均有访问权限，对于只有普通文件才有访问权限这样的认知是错误的，对于每一个文件共有九种权限</p>
 <div class="table-container">
 <table>
 <thead>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-17T14:27:11.378Z</updated>
+  <updated>2020-05-17T14:28:43.028Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,17 +21,11 @@
     <link href="http://yoursite.com/2020/05/17/linux-mode/"/>
     <id>http://yoursite.com/2020/05/17/linux-mode/</id>
     <published>2020-05-17T12:44:45.000Z</published>
-    <updated>2020-05-17T14:27:11.378Z</updated>
+    <updated>2020-05-17T14:28:43.028Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;文件的权限&quot;&gt;&lt;a href=&quot;#文件的权限&quot; class=&quot;headerlink&quot; title=&quot;文件的权限&quot;&gt;&lt;/a&gt;文件的权限&lt;/h2&gt;&lt;p&gt;对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode
-        
-      
+      &lt;h2 id=&quot;文件的权限&quot;&gt;&lt;a href=&quot;#文件的权限&quot; class=&quot;headerlink&quot; title=&quot;文件的权限&quot;&gt;&lt;/a&gt;文件的权限&lt;/h2&gt;&lt;p&gt;对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）&lt;/p&gt;
     
     </summary>
     

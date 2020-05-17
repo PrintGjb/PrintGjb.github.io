@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-17 20:44:45 / 修改时间：22:27:11" itemprop="dateCreated datePublished" datetime="2020-05-17T20:44:45+08:00">2020-05-17</time>
+              <time title="创建时间：2020-05-17 20:44:45 / 修改时间：22:28:43" itemprop="dateCreated datePublished" datetime="2020-05-17T20:44:45+08:00">2020-05-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,116 +261,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）均有访问权限，对于只有普通文件才有访问权限这样的认知是错误的，对于每一个文件共有九种权限</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>st_mode屏蔽</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S_IRUSR</td>
-<td>用户可读</td>
-</tr>
-<tr>
-<td>S_IWUSR</td>
-<td>用户可写</td>
-</tr>
-<tr>
-<td>S_IXUSR</td>
-<td>用户可执行</td>
-</tr>
-<tr>
-<td>S_IRGRP</td>
-<td>组可读</td>
-</tr>
-<tr>
-<td>S_IWGRP</td>
-<td>组可写</td>
-</tr>
-<tr>
-<td>S_IXGRP</td>
-<td>组可执行</td>
-</tr>
-<tr>
-<td>S_IROTH</td>
-<td>其他可读</td>
-</tr>
-<tr>
-<td>S_IWOTH</td>
-<td>其他可写</td>
-</tr>
-<tr>
-<td>S_IXOTH</td>
-<td>其他可执行</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>那么我们如何使用这些权限屏蔽字？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argvs[])</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"please input one\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">int</span> n = stat(argvs[<span class="number">1</span>], &amp;buf);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"stat error"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IRUSR)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"user can read, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IWUSR)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"user can write, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IXUSR)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"user can execute, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IRGRP)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"group can read, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IWGRP)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"group can write, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IXGRP)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"group can execute, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IROTH)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"other can read, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IWOTH)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"othear can write, "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(buf.st_mode &amp; S_IXOTH)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"other can execute"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们在命令行中执行如下命令便可以获得文件权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./a.out 文件名</span><br></pre></td></tr></table></figure>
-<p>我们通过逻辑且运算便可以获得权限，那么我们想对一个文件设置权限又该如何进行呢？我们使用逻辑与运算可以设置文件的权限，比如下面的代码可以设置文件可读可写可执行</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IUWRX (S_IRUSR | S_IWUSR | S_IXUSR)</span></span><br><span class="line">buf-&gt;st_mode | S_IUWRX</span><br></pre></td></tr></table></figure>
-<p>如果想清除文件权限也同样可以通过逻辑运算进行,比如如下代码可以清除文件的用户读权限</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf-&gt;st_mode &amp;~ S_IRUSR</span><br></pre></td></tr></table></figure>
-<p>这样设置后的权限仅仅是更改了stat在内存中的值，这样的操作并不会影响内核对权限的检测，也不会自动保存到磁盘中，如需修改至物理磁盘必须再执行chmod</p>
-<h2 id="访问权限规则"><a href="#访问权限规则" class="headerlink" title="访问权限规则"></a>访问权限规则</h2><ul>
-<li>对于我们使用名字打开的任何一个文件，对该名字包含的每一级目录包括隐藏目录我们都应该具有执行权限</li>
-<li>对于我们打开的文件进行性读写操作，这取决于我们对文件的权限拥有</li>
-<li>使用open函数O_TRUNC标志时，我们必须对文件具有写权限</li>
-<li>在目录下创建一个新的文件时我们必须对目录具有写权限执行权限</li>
-<li>删除一个目录中的文件时，我们对该目录必须有写权限执行权限，对于文件本身我们不需要具备任何权限</li>
-<li>对于目录的读权限我们只能读取到目录中的文件名，并不能打开文件，如需打开文件我们必须对目录具有执行权限</li>
-<li>在对文件权限设置时，我们遵循文件权限最小化</li>
-</ul>
-<h2 id="访问权限测试"><a href="#访问权限测试" class="headerlink" title="访问权限测试"></a>访问权限测试</h2><p>当我们对文件进行删除，创建，打开操作时会引发内核对权限的测试，测试流程如下</p>
-<ol>
-<li>若进程的有效用户ID是0（超级管理员）那么则允许访问，这在最大限度上给与超级管理员对文件系统的访问自由</li>
-<li>若进程的有效用户ID等于进程的拥有者ID，如果所有者适当的访问权限位被设置则允许访问，否者不允许访问</li>
-<li>若进城的有效用户ID或进程的附属组ID之一等于文件的组ID，如果组适当的访问权限被设置则允许访问，否则不允许访问</li>
-<li>若其他用户的适当的访问权限被设置则允许访问，否则不允许访问</li>
-</ol>
-<p>注意的是以上4条队则必须按照顺序执行，也就是说是else if 的关系</p>
-<h2 id="access-amp-faccessat-函数"><a href="#access-amp-faccessat-函数" class="headerlink" title="access &amp; faccessat 函数"></a>access &amp; faccessat 函数</h2><p>access 函数和 faccessat 函数是按照实际的用户ID和组ID进行访问权限测试的，步骤也分为四步同上面介绍的一样。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数原型</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">access</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">faccessat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> mode, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line">																若成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<p>pathname:文件的绝对路径</p>
-<p>mode：如果仅仅是验证文件是否存在的时候设置为F_OK否则按照如下设置</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>mode</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>R_OK</td>
-<td>测试读权限</td>
-</tr>
-<tr>
-<td>W_OK</td>
-<td>测试写权限</td>
-</tr>
-<tr>
-<td>X_OK</td>
-<td>测试执行权限</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>fd：文件描述符</p>
-<p>flag：flag参数可以用于影响faccessat函数的行为，当flag参数设置为E_ACCESS参数时，faccessat函数将按照有效用户id对文件进行权限测试，而不是按照实际的用户id对文件进行测试，</p>
-<p>案例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argvs[])</span></span>&#123;</span><br><span class="line">	<span class="comment">//access(const char *pathname, int mode);</span></span><br><span class="line">	<span class="keyword">if</span>(argc != <span class="number">2</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"please input right parameter"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(access(argvs[<span class="number">1</span>], F_OK))&#123;</span><br><span class="line">		perror(<span class="string">"access error for"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"file ok\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(access(argvs[<span class="number">1</span>], R_OK))&#123;</span><br><span class="line">		perror(<span class="string">"access error for"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"read access\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((<span class="built_in">open</span>(argvs[<span class="number">1</span>], O_RDONLY)) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"open error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"reading \n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在命令行中我们输入如下命令测试</p>
-<p><img src="https://img-blog.csdnimg.cn/2020051722144736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjAzMTIw,size_16,color_FFFFFF,t_70" style="zoom: 67%;"></p>
-
+          <h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/17/linux-mode/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
