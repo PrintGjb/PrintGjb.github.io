@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>一颗牙疼</title>
-  <icon>http://printgjb.github.io/icon.png</icon>
+  <icon>http://yoursite.com/icon.png</icon>
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://printgjb.github.io/"/>
-  <updated>2020-05-16T10:27:49.840Z</updated>
-  <id>http://printgjb.github.io/</id>
+  <link href="http://yoursite.com/"/>
+  <updated>2020-05-16T23:33:57.633Z</updated>
+  <id>http://yoursite.com/</id>
   
   <author>
     <name>一颗牙疼</name>
@@ -17,9 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>hello</title>
+    <link href="http://yoursite.com/2020/05/17/hello/"/>
+    <id>http://yoursite.com/2020/05/17/hello/</id>
+    <published>2020-05-16T23:33:36.000Z</published>
+    <updated>2020-05-16T23:33:57.633Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;jkfd&lt;/p&gt;
+&lt;p&gt;fksdlfj&lt;/p&gt;
+
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>高并发——epoll反应堆模型</title>
-    <link href="http://printgjb.github.io/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://printgjb.github.io/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/</id>
+    <link href="http://yoursite.com/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://yoursite.com/2020/05/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E2%80%94%E2%80%94epoll%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%9E%8B/</id>
     <published>2020-05-16T09:18:59.000Z</published>
     <updated>2020-05-16T10:27:49.840Z</updated>
     
@@ -31,12 +56,12 @@
     </summary>
     
     
-      <category term="网络编程" scheme="http://PrintGjb.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <category term="网络编程" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="Linxu" scheme="http://PrintGjb.github.io/tags/Linxu/"/>
+      <category term="Linxu" scheme="http://yoursite.com/tags/Linxu/"/>
     
-      <category term="网络编程" scheme="http://PrintGjb.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <category term="网络编程" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
