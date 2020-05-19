@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-18T02:40:38.138Z</updated>
+  <updated>2020-05-19T07:41:21.388Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文件屏蔽字&amp;chmod解读</title>
+    <link href="http://yoursite.com/2020/05/19/umask-chmod/"/>
+    <id>http://yoursite.com/2020/05/19/umask-chmod/</id>
+    <published>2020-05-19T07:12:06.000Z</published>
+    <updated>2020-05-19T07:41:21.388Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上一篇blog 我们介绍了9种文件权限位，在这基础上我们介绍与每个进程相关联的文件模式创建屏蔽字&lt;/p&gt;
+&lt;h2 id=&quot;UMASK&quot;&gt;&lt;a href=&quot;#UMASK&quot; class=&quot;headerlink&quot; title=&quot;UMASK&quot;&gt;&lt;/a&gt;UMASK&lt;/h2&gt;&lt;p&gt;umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统编程" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="系统编程" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>修改0号中断程序</title>
