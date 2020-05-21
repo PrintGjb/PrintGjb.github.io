@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-19T07:41:21.388Z</updated>
+  <updated>2020-05-21T01:20:57.083Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>文件截断和链接</title>
+    <link href="http://yoursite.com/2020/05/20/truncate-link/"/>
+    <id>http://yoursite.com/2020/05/20/truncate-link/</id>
+    <published>2020-05-20T14:36:45.000Z</published>
+    <updated>2020-05-21T01:20:57.083Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;文件截断&quot;&gt;&lt;a href=&quot;#文件截断&quot; class=&quot;headerlink&quot; title=&quot;文件截断&quot;&gt;&lt;/a&gt;文件截断&lt;/h2&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;meta-string&quot;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;truncate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *pathname, &lt;span class=&quot;keyword&quot;&gt;off_t&lt;/span&gt; lenght)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ftruncate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; fd, &lt;span class=&quot;keyword&quot;&gt;off_t&lt;/span&gt; lenght)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    							成功返回0，出错返回-1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>文件屏蔽字&amp;chmod解读</title>
     <link href="http://yoursite.com/2020/05/19/umask-chmod/"/>
     <id>http://yoursite.com/2020/05/19/umask-chmod/</id>
     <published>2020-05-19T07:12:06.000Z</published>
-    <updated>2020-05-19T07:41:21.388Z</updated>
+    <updated>2020-05-20T14:39:01.082Z</updated>
     
     <summary type="html">
     
@@ -31,12 +55,12 @@
     </summary>
     
     
-      <category term="系统编程" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
+      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
     
-    
-      <category term="系统编程" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
     
   </entry>
   
@@ -66,7 +90,7 @@
     <link href="http://yoursite.com/2020/05/17/linux-mode/"/>
     <id>http://yoursite.com/2020/05/17/linux-mode/</id>
     <published>2020-05-17T12:44:45.000Z</published>
-    <updated>2020-05-17T14:28:43.028Z</updated>
+    <updated>2020-05-20T14:38:36.922Z</updated>
     
     <summary type="html">
     
@@ -75,12 +99,12 @@
     </summary>
     
     
-      <category term="系统编程" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
+      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
     
-    
-      <category term="系统编程" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
     
   </entry>
   

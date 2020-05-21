@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/05/20/truncate-link/</loc>
+    
+    <lastmod>2020-05-21T01:20:57.083Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/05/19/umask-chmod/</loc>
+    
+    <lastmod>2020-05-20T14:39:01.082Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/05/17/linux-mode/</loc>
+    
+    <lastmod>2020-05-20T14:38:36.922Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/05/16/epoll/</loc>
     
     <lastmod>2020-05-19T13:51:13.916Z</lastmod>
@@ -9,23 +30,9 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/05/19/umask-chmod/</loc>
-    
-    <lastmod>2020-05-19T07:41:21.388Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/05/18/int0/</loc>
     
     <lastmod>2020-05-18T02:40:38.138Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/05/17/linux-mode/</loc>
-    
-    <lastmod>2020-05-17T14:28:43.028Z</lastmod>
     
   </url>
   
