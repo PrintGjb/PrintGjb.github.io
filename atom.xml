@@ -26,7 +26,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;文件截断&quot;&gt;&lt;a href=&quot;#文件截断&quot; class=&quot;headerlink&quot; title=&quot;文件截断&quot;&gt;&lt;/a&gt;文件截断&lt;/h2&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;meta-string&quot;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;truncate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *pathname, &lt;span class=&quot;keyword&quot;&gt;off_t&lt;/span&gt; lenght)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ftruncate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; fd, &lt;span class=&quot;keyword&quot;&gt;off_t&lt;/span&gt; lenght)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    							成功返回0，出错返回-1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，&lt;/p&gt;
+&lt;p&gt;这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，
     
     </summary>
     
@@ -50,7 +50,7 @@
     <summary type="html">
     
       &lt;p&gt;上一篇blog 我们介绍了9种文件权限位，在这基础上我们介绍与每个进程相关联的文件模式创建屏蔽字&lt;/p&gt;
-&lt;h2 id=&quot;UMASK&quot;&gt;&lt;a href=&quot;#UMASK&quot; class=&quot;headerlink&quot; title=&quot;UMASK&quot;&gt;&lt;/a&gt;UMASK&lt;/h2&gt;&lt;p&gt;umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，&lt;/p&gt;
+&lt;h2 id=&quot;UMASK&quot;&gt;&lt;a href=&quot;#UMASK&quot; class=&quot;headerlink&quot; title=&quot;UMASK&quot;&gt;&lt;/a&gt;UMASK&lt;/h2&gt;&lt;p&gt;umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，
     
     </summary>
     
@@ -73,7 +73,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;中断&quot;&gt;&lt;a href=&quot;#中断&quot; class=&quot;headerlink&quot; title=&quot;中断&quot;&gt;&lt;/a&gt;中断&lt;/h2&gt;&lt;p&gt;任何一个CPU都有一种能力——在执行完成一个指令后检测从CPU内部或者外部传送过来的特殊信息，并立即对该信息进行处理，我们称这种特殊的信息为中断信息，&lt;/p&gt;
+      &lt;h2 id=&quot;中断&quot;&gt;&lt;a href=&quot;#中断&quot; class=&quot;headerlink&quot; title=&quot;中断&quot;&gt;&lt;/a&gt;中断&lt;/h2&gt;&lt;p&gt;任何一个CPU都有一种能力——在执行完成一个指令后检测从CPU内部或者外部传送过来的特殊信息，并立即对该信息进行处理，我们称这种特殊的信息为中断信息，
     
     </summary>
     
@@ -94,7 +94,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;文件的权限&quot;&gt;&lt;a href=&quot;#文件的权限&quot; class=&quot;headerlink&quot; title=&quot;文件的权限&quot;&gt;&lt;/a&gt;文件的权限&lt;/h2&gt;&lt;p&gt;对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）&lt;/p&gt;
+      &lt;h2 id=&quot;文件的权限&quot;&gt;&lt;a href=&quot;#文件的权限&quot; class=&quot;headerlink&quot; title=&quot;文件的权限&quot;&gt;&lt;/a&gt;文件的权限&lt;/h2&gt;&lt;p&gt;对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）
     
     </summary>
     
@@ -167,7 +167,7 @@
     <summary type="html">
     
       &lt;p&gt;=========================================================&lt;br&gt;下面代码实现的思想：epoll反应堆模型：（ libevent 网络编程开源库 核心思想）&lt;/p&gt;
-&lt;p&gt;1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――&lt;/p&gt;
+&lt;p&gt;1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――
     
     </summary>
     
@@ -175,9 +175,9 @@
       <category term="网络编程" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="网络编程" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="网络编程" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   

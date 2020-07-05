@@ -277,7 +277,7 @@
 
       
           <h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> lenght)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> lenght)</span></span></span><br><span class="line">    							成功返回0，出错返回-1</span><br></pre></td></tr></table></figure>
-<p>这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，</p>
+<p>这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/20/truncate-link/#more" rel="contents">
@@ -387,7 +387,7 @@
 
       
           <p>上一篇blog 我们介绍了9种文件权限位，在这基础上我们介绍与每个进程相关联的文件模式创建屏蔽字</p>
-<h2 id="UMASK"><a href="#UMASK" class="headerlink" title="UMASK"></a>UMASK</h2><p>umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，</p>
+<h2 id="UMASK"><a href="#UMASK" class="headerlink" title="UMASK"></a>UMASK</h2><p>umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/19/umask-chmod/#more" rel="contents">
@@ -490,7 +490,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>任何一个CPU都有一种能力——在执行完成一个指令后检测从CPU内部或者外部传送过来的特殊信息，并立即对该信息进行处理，我们称这种特殊的信息为中断信息，</p>
+          <h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>任何一个CPU都有一种能力——在执行完成一个指令后检测从CPU内部或者外部传送过来的特殊信息，并立即对该信息进行处理，我们称这种特殊的信息为中断信息，
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/18/int0/#more" rel="contents">
@@ -599,7 +599,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）</p>
+          <h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/17/linux-mode/#more" rel="contents">
@@ -918,7 +918,7 @@
 
       
           <p>=========================================================<br>下面代码实现的思想：epoll反应堆模型：（ libevent 网络编程开源库 核心思想）</p>
-<p>1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――</p>
+<p>1.　　普通多路IO转接服务器： 红黑树 ―― 添加待监听的结点 ―― epoll_ctl ―― EPOLLIN ―― fd ―― 监听 ―― epoll_wait ――
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/16/epoll/#more" rel="contents">
