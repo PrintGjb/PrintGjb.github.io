@@ -333,16 +333,4 @@
         <tag>APUE</tag>
       </tags>
   </entry>
-  <entry>
-    <title>文件时间</title>
-    <url>/2020/05/21/timespec/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>APUE</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>APUE</tag>
-      </tags>
-  </entry>
 </search>

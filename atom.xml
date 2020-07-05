@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-22T00:25:52.623Z</updated>
+  <updated>2020-05-21T01:20:57.083Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>文件时间</title>
-    <link href="http://yoursite.com/2020/05/21/timespec/"/>
-    <id>http://yoursite.com/2020/05/21/timespec/</id>
-    <published>2020-05-21T07:28:30.000Z</published>
-    <updated>2020-05-22T00:25:52.623Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
-    
-  </entry>
   
   <entry>
     <title>文件截断和链接</title>
