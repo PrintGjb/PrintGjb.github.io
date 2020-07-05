@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>一颗牙疼</title>
+  <title>一颗牙疼的博客</title>
   <icon>http://yoursite.com/icon.png</icon>
   <subtitle>梦想是现实的延续</subtitle>
   <link href="/atom.xml" rel="self"/>
