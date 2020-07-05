@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>一颗牙疼的博客</title>
-  <icon>http://yoursite.com/icon.png</icon>
+  <icon>http://gjbblog.xyz/icon.png</icon>
   <subtitle>梦想是现实的延续</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://gjbblog.xyz/"/>
   <updated>2020-05-21T01:20:57.083Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://gjbblog.xyz/</id>
   
   <author>
     <name>一颗牙疼</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>文件截断和链接</title>
-    <link href="http://yoursite.com/2020/05/20/truncate-link/"/>
-    <id>http://yoursite.com/2020/05/20/truncate-link/</id>
+    <link href="http://gjbblog.xyz/2020/05/20/truncate-link/"/>
+    <id>http://gjbblog.xyz/2020/05/20/truncate-link/</id>
     <published>2020-05-20T14:36:45.000Z</published>
     <updated>2020-05-21T01:20:57.083Z</updated>
     
@@ -33,19 +33,19 @@
     </summary>
     
     
-      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
+      <category term="APUE" scheme="http://gjbblog.xyz/categories/APUE/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="http://gjbblog.xyz/tags/Linux/"/>
     
-      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
+      <category term="APUE" scheme="http://gjbblog.xyz/tags/APUE/"/>
     
   </entry>
   
   <entry>
     <title>文件屏蔽字&amp;chmod解读</title>
-    <link href="http://yoursite.com/2020/05/19/umask-chmod/"/>
-    <id>http://yoursite.com/2020/05/19/umask-chmod/</id>
+    <link href="http://gjbblog.xyz/2020/05/19/umask-chmod/"/>
+    <id>http://gjbblog.xyz/2020/05/19/umask-chmod/</id>
     <published>2020-05-19T07:12:06.000Z</published>
     <updated>2020-05-20T14:39:01.082Z</updated>
     
@@ -59,19 +59,19 @@
     </summary>
     
     
-      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
+      <category term="APUE" scheme="http://gjbblog.xyz/categories/APUE/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="http://gjbblog.xyz/tags/Linux/"/>
     
-      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
+      <category term="APUE" scheme="http://gjbblog.xyz/tags/APUE/"/>
     
   </entry>
   
   <entry>
     <title>修改0号中断程序</title>
-    <link href="http://yoursite.com/2020/05/18/int0/"/>
-    <id>http://yoursite.com/2020/05/18/int0/</id>
+    <link href="http://gjbblog.xyz/2020/05/18/int0/"/>
+    <id>http://gjbblog.xyz/2020/05/18/int0/</id>
     <published>2020-05-18T02:00:43.000Z</published>
     <updated>2020-05-18T02:40:38.138Z</updated>
     
@@ -84,17 +84,17 @@
     </summary>
     
     
-      <category term="汇编" scheme="http://yoursite.com/categories/%E6%B1%87%E7%BC%96/"/>
+      <category term="汇编" scheme="http://gjbblog.xyz/categories/%E6%B1%87%E7%BC%96/"/>
     
     
-      <category term="汇编" scheme="http://yoursite.com/tags/%E6%B1%87%E7%BC%96/"/>
+      <category term="汇编" scheme="http://gjbblog.xyz/tags/%E6%B1%87%E7%BC%96/"/>
     
   </entry>
   
   <entry>
     <title>目录和文件的权限</title>
-    <link href="http://yoursite.com/2020/05/17/linux-mode/"/>
-    <id>http://yoursite.com/2020/05/17/linux-mode/</id>
+    <link href="http://gjbblog.xyz/2020/05/17/linux-mode/"/>
+    <id>http://gjbblog.xyz/2020/05/17/linux-mode/</id>
     <published>2020-05-17T12:44:45.000Z</published>
     <updated>2020-05-20T14:38:36.922Z</updated>
     
@@ -107,19 +107,19 @@
     </summary>
     
     
-      <category term="APUE" scheme="http://yoursite.com/categories/APUE/"/>
+      <category term="APUE" scheme="http://gjbblog.xyz/categories/APUE/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="http://gjbblog.xyz/tags/Linux/"/>
     
-      <category term="APUE" scheme="http://yoursite.com/tags/APUE/"/>
+      <category term="APUE" scheme="http://gjbblog.xyz/tags/APUE/"/>
     
   </entry>
   
   <entry>
     <title>超简单的notepad++使用vim插件方法</title>
-    <link href="http://yoursite.com/2020/05/17/install-notepad-visimulator/"/>
-    <id>http://yoursite.com/2020/05/17/install-notepad-visimulator/</id>
+    <link href="http://gjbblog.xyz/2020/05/17/install-notepad-visimulator/"/>
+    <id>http://gjbblog.xyz/2020/05/17/install-notepad-visimulator/</id>
     <published>2020-05-17T06:54:19.000Z</published>
     <updated>2020-05-17T07:15:10.743Z</updated>
     
@@ -133,19 +133,19 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://gjbblog.xyz/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://gjbblog.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
     
-      <category term="汇编" scheme="http://yoursite.com/tags/%E6%B1%87%E7%BC%96/"/>
+      <category term="汇编" scheme="http://gjbblog.xyz/tags/%E6%B1%87%E7%BC%96/"/>
     
   </entry>
   
   <entry>
     <title>原码 补码 反码 详解</title>
-    <link href="http://yoursite.com/2020/05/17/two-s-complement-representation/"/>
-    <id>http://yoursite.com/2020/05/17/two-s-complement-representation/</id>
+    <link href="http://gjbblog.xyz/2020/05/17/two-s-complement-representation/"/>
+    <id>http://gjbblog.xyz/2020/05/17/two-s-complement-representation/</id>
     <published>2020-05-17T06:49:12.000Z</published>
     <updated>2020-05-17T07:09:46.791Z</updated>
     
@@ -160,19 +160,19 @@
     </summary>
     
     
-      <category term="计算机基础" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机基础" scheme="http://gjbblog.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="汇编" scheme="http://yoursite.com/tags/%E6%B1%87%E7%BC%96/"/>
+      <category term="汇编" scheme="http://gjbblog.xyz/tags/%E6%B1%87%E7%BC%96/"/>
     
-      <category term="计算机基础" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机基础" scheme="http://gjbblog.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
   <entry>
     <title>高并发——epoll反应堆模型</title>
-    <link href="http://yoursite.com/2020/05/16/epoll/"/>
-    <id>http://yoursite.com/2020/05/16/epoll/</id>
+    <link href="http://gjbblog.xyz/2020/05/16/epoll/"/>
+    <id>http://gjbblog.xyz/2020/05/16/epoll/</id>
     <published>2020-05-16T09:18:59.000Z</published>
     <updated>2020-05-19T13:51:13.916Z</updated>
     
@@ -186,12 +186,12 @@
     </summary>
     
     
-      <category term="网络编程" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <category term="网络编程" scheme="http://gjbblog.xyz/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="http://gjbblog.xyz/tags/Linux/"/>
     
-      <category term="网络编程" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <category term="网络编程" scheme="http://gjbblog.xyz/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
