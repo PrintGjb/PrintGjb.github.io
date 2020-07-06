@@ -147,7 +147,7 @@
 <p>案例：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argvs[])</span></span>&#123;</span><br><span class="line">	<span class="comment">//access(const char *pathname, int mode);</span></span><br><span class="line">	<span class="keyword">if</span>(argc != <span class="number">2</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"please input right parameter"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(access(argvs[<span class="number">1</span>], F_OK))&#123;</span><br><span class="line">		perror(<span class="string">"access error for"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"file ok\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(access(argvs[<span class="number">1</span>], R_OK))&#123;</span><br><span class="line">		perror(<span class="string">"access error for"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"read access\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((<span class="built_in">open</span>(argvs[<span class="number">1</span>], O_RDONLY)) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"open error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"reading \n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在命令行中我们输入如下命令测试</p>
-<p><img src="https://img-blog.csdnimg.cn/2020051722144736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjAzMTIw,size_16,color_FFFFFF,t_70" style="zoom: 67%;" /></p>
+<p><img data-src="https://img-blog.csdnimg.cn/2020051722144736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjAzMTIw,size_16,color_FFFFFF,t_70" style="zoom: 67%;" /></p>
 ]]></content>
       <categories>
         <category>APUE</category>
@@ -176,6 +176,59 @@
       </categories>
       <tags>
         <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件截断和链接</title>
+    <url>/2020/05/20/truncate-link/</url>
+    <content><![CDATA[<h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> lenght)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> lenght)</span></span></span><br><span class="line">    							成功返回0，出错返回-1</span><br></pre></td></tr></table></figure>
+<p>这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，<a id="more"></a>如果文件的长度小于length，那么文件的长度将增加到length，空出的地方以文件空洞补充</p>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>在说明文件链接前我们先讲讲文件系统，这样有利于我们更好的理解文件链接；对于一块磁盘我们可以将其分成若干个分区，对于每一个分区我们都可以采用不同的文件系统，i节点是固定的长度记录项，i节点记录着文件信息。</p>
+<p>在实际情况中，可能有若干个目录项指向同一个I节点，每一个i节点都有一个连接数记录器，只有指向i节点的链接数为0时，该i节点记录的文件信息才能被释放，这就是为什么解除文件链接不一定是释放磁盘操作的原因，也是为什么删除目录项函数是unlink而不是delete的原因，在stat结构体中，st_nlink用于记录i节点的文件链接数，这种文件链接我们称之为硬链接，</p>
+<p>与硬链接对应的自然有软链接，我们也称之为符号链接，symlink，符号链接文件的实际内容是该符号链接指向的文件的 名称，该文件类型在i节点中是S_IFLINK</p>
+<p>i节点包含了与文件有关的所有信息：文件类型，文件长度，文件权限位，指向文件数据块的指针，文件的修改时间等，stat结构体中的信息几乎全部取于i节点中，只有两项重要的数据存放于目录项中：i节点编号，文件名，i节点的数据类型是ino_t</p>
+<p>因为i节点编号指向同一个文件系统中的i节点，所以一个目录项不能指向另一个文件系统中的i节点，这也是为什么使用ln命令构建一个指向现有文件的新目录项不能跨越文件系统的原因。</p>
+<p>在同一文件系统中为文件重命名时，文件其实并未移动，而是创建一个新的目录项指向i节点，并删除旧的目录项，文件的连接数并未改变，借此我们可以实现mv命令</p>
+<p>对于文件系统其实我们可以把它理解为一本书，而i节点则是书的目录</p>
+<h2 id="文件链接"><a href="#文件链接" class="headerlink" title="文件链接"></a>文件链接</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#icnlude <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">link</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">linkat</span><span class="params">(<span class="keyword">int</span> efd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> nfd, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line">													成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>link会根根据patname创建一个名为newpath的硬链接，如果newpath已经存在则返回出错，只能创建newpath最后一个分量，前面的部分应该已经存在，比如newpath = /home/guest/foo.copy 那么 /home/guest 应该已经存在，</p>
+<p>对于linkat函数他的oldpath 是由文件描述符合相对路径决定的，比如当前文件存在于/home/guest/01-dir/linkat   nfd指向/home/guest/001.c  而newpathname = ../001.copy 那么该链接文件会被创建在/home/001.copy，如果fd被设置为AT_FDCWD那么相对路径则是相对于当前目录中</p>
+<p>flag用于控制linkat的一些操作，当flag被设置为AT_SYMLINK_FOLLOW时，创建的链接为符号链接指向的文件而不是符号链接，</p>
+<p>由该函数创建的链接不能跨越文件系统，创建目录项和增加链接计数器是一个原子操作。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line">									成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>如需删除一个链接，我们使用unlink函数，该函数会使文件的连接数减一，如果文件的连接数减为0则在磁盘上删除改文件，如果还存在其他的文件链接那么通过文件链接依然可以访问改文件，在执行unlink时除了需要该目录的写和执行权限还需要具备以下3个条件之一</p>
+<ul>
+<li>拥有该目录</li>
+<li>拥有该文件</li>
+<li>超级管理员</li>
+</ul>
+<p>若果文件的链接数为0则会删除改文件，但是还有一个条件会阻止文件的删除，那就是有进程打开了改文件，关闭一个文件时，内核首先会检查进程数，如果这个计数器为0，内核会接着检查文件链接，如果文件链接数也为0，那么改文件则会被删除。</p>
+<p>flag参数将会控制该函数的操作，如果flag设置为AT_REMOVEDIR则unlink可以删除目录，但是这种操作并不常用</p>
+<p>我们来观察一下以下程序</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fd, n;</span><br><span class="line">	fd = <span class="built_in">open</span>(<span class="string">"test"</span>, O_RDWR | O_CREAT, <span class="number">0755</span>);</span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"open error"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	n = unlink(<span class="string">"test"</span>);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"unlink error"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	n = <span class="built_in">write</span>(fd, <span class="string">"hello"</span>, <span class="number">5</span>);</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">5</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"write successed\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		perror(<span class="string">"write error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么我们运行一下以下程序我们发现我们可以写入成功，并且程序结束后目录中并未有test文件，那么这种操作可以有效地 防止程序意外崩溃后不能删除临时文件。</p>
+<p>如果pathname是一个符号链接，那么该操作删除的则是符号链接本身而不是由符号链接指向的文件。</p>
+<h2 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h2><p>符号链接是一个文件的间接指针，符号链接与上文所述的硬链接不同，硬链接是直接指向文件的i节点，引入符号链接则主要是为了避开硬链接的一些限制；</p>
+<p>硬链接通常需要在同一文件系统</p>
+<p>只有超级管理员可以创建指向目录的硬链接</p>
+<p>符号链接则是没有这么多限制，任何用户均可以创建指向目录的链接，也可以分布于不同的文件系统，符号链接一般用于把整个文件或者目录移动到另外一个文件系统，</p>
+<p>在使用自函数调用文件链接时应该注意函数是否会跟随符号链接。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200521090635716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjAzMTIw,size_16,color_FFFFFF,t_70" style="zoom:67%;" /></p>
+<p>需要注意的是创建符号链接时可能会引入死循环（对于查找文件名的函数），比如在test目录下创建一个普通文件和一个指向test目录的符号链接，这样做机会引入死循环</p>
+<p>这样的bug是很容易消除的，因为unlink不会跟随符号链接，所以我们只要删除符号链接就ok了，但是如果是硬链接就会比较麻烦了，这也是为什么硬链接不允许创建目录链接的原因。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpathname, <span class="keyword">const</span> <span class="keyword">char</span> *newpathname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlinkat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpathname, <span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *newpathname)</span></span>;</span><br><span class="line">													成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>通过以上两个函数我们可以创建一个指向oldpathname的符号链接newpathname，</p>
+<p>如果我们使用open函数打开一个符号链接，open函数会跟随到符号链接所指向的文件，但是如果这个文件不存在，则open函数会返回error</p>
+<p>那么我们想要读取符号链接的内容怎么办呢？有需求就有生产，我们可以使用符号链接读取函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *buf, <span class="keyword">ssize_t</span> bufsiz)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *buf, <span class="keyword">ssize_t</span> bufsiz)</span></span>;</span><br><span class="line">													成功返回读取的字节数，否则返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>两个函数集成了read open close 的所有操作，如果成功则返回读取的字节数。</p>
+]]></content>
+      <categories>
+        <category>APUE</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>APUE</tag>
       </tags>
   </entry>
   <entry>
@@ -217,59 +270,6 @@
       <tags>
         <tag>汇编</tag>
         <tag>计算机基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件截断和链接</title>
-    <url>/2020/05/20/truncate-link/</url>
-    <content><![CDATA[<h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> lenght)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> lenght)</span></span></span><br><span class="line">    							成功返回0，出错返回-1</span><br></pre></td></tr></table></figure>
-<p>这两个函数均可以对文件设置截断，如果文件的长度大于length则文件被截断为length，<a id="more"></a>如果文件的长度小于length，那么文件的长度将增加到length，空出的地方以文件空洞补充</p>
-<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>在说明文件链接前我们先讲讲文件系统，这样有利于我们更好的理解文件链接；对于一块磁盘我们可以将其分成若干个分区，对于每一个分区我们都可以采用不同的文件系统，i节点是固定的长度记录项，i节点记录着文件信息。</p>
-<p>在实际情况中，可能有若干个目录项指向同一个I节点，每一个i节点都有一个连接数记录器，只有指向i节点的链接数为0时，该i节点记录的文件信息才能被释放，这就是为什么解除文件链接不一定是释放磁盘操作的原因，也是为什么删除目录项函数是unlink而不是delete的原因，在stat结构体中，st_nlink用于记录i节点的文件链接数，这种文件链接我们称之为硬链接，</p>
-<p>与硬链接对应的自然有软链接，我们也称之为符号链接，symlink，符号链接文件的实际内容是该符号链接指向的文件的 名称，该文件类型在i节点中是S_IFLINK</p>
-<p>i节点包含了与文件有关的所有信息：文件类型，文件长度，文件权限位，指向文件数据块的指针，文件的修改时间等，stat结构体中的信息几乎全部取于i节点中，只有两项重要的数据存放于目录项中：i节点编号，文件名，i节点的数据类型是ino_t</p>
-<p>因为i节点编号指向同一个文件系统中的i节点，所以一个目录项不能指向另一个文件系统中的i节点，这也是为什么使用ln命令构建一个指向现有文件的新目录项不能跨越文件系统的原因。</p>
-<p>在同一文件系统中为文件重命名时，文件其实并未移动，而是创建一个新的目录项指向i节点，并删除旧的目录项，文件的连接数并未改变，借此我们可以实现mv命令</p>
-<p>对于文件系统其实我们可以把它理解为一本书，而i节点则是书的目录</p>
-<h2 id="文件链接"><a href="#文件链接" class="headerlink" title="文件链接"></a>文件链接</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#icnlude <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">link</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">linkat</span><span class="params">(<span class="keyword">int</span> efd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> nfd, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</span><br><span class="line">													成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<p>link会根根据patname创建一个名为newpath的硬链接，如果newpath已经存在则返回出错，只能创建newpath最后一个分量，前面的部分应该已经存在，比如newpath = /home/guest/foo.copy 那么 /home/guest 应该已经存在，</p>
-<p>对于linkat函数他的oldpath 是由文件描述符合相对路径决定的，比如当前文件存在于/home/guest/01-dir/linkat   nfd指向/home/guest/001.c  而newpathname = ../001.copy 那么该链接文件会被创建在/home/001.copy，如果fd被设置为AT_FDCWD那么相对路径则是相对于当前目录中</p>
-<p>flag用于控制linkat的一些操作，当flag被设置为AT_SYMLINK_FOLLOW时，创建的链接为符号链接指向的文件而不是符号链接，</p>
-<p>由该函数创建的链接不能跨越文件系统，创建目录项和增加链接计数器是一个原子操作。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line">									成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<p>如需删除一个链接，我们使用unlink函数，该函数会使文件的连接数减一，如果文件的连接数减为0则在磁盘上删除改文件，如果还存在其他的文件链接那么通过文件链接依然可以访问改文件，在执行unlink时除了需要该目录的写和执行权限还需要具备以下3个条件之一</p>
-<ul>
-<li>拥有该目录</li>
-<li>拥有该文件</li>
-<li>超级管理员</li>
-</ul>
-<p>若果文件的链接数为0则会删除改文件，但是还有一个条件会阻止文件的删除，那就是有进程打开了改文件，关闭一个文件时，内核首先会检查进程数，如果这个计数器为0，内核会接着检查文件链接，如果文件链接数也为0，那么改文件则会被删除。</p>
-<p>flag参数将会控制该函数的操作，如果flag设置为AT_REMOVEDIR则unlink可以删除目录，但是这种操作并不常用</p>
-<p>我们来观察一下以下程序</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fd, n;</span><br><span class="line">	fd = <span class="built_in">open</span>(<span class="string">"test"</span>, O_RDWR | O_CREAT, <span class="number">0755</span>);</span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"open error"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	n = unlink(<span class="string">"test"</span>);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"unlink error"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	n = <span class="built_in">write</span>(fd, <span class="string">"hello"</span>, <span class="number">5</span>);</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">5</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"write successed\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		perror(<span class="string">"write error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么我们运行一下以下程序我们发现我们可以写入成功，并且程序结束后目录中并未有test文件，那么这种操作可以有效地 防止程序意外崩溃后不能删除临时文件。</p>
-<p>如果pathname是一个符号链接，那么该操作删除的则是符号链接本身而不是由符号链接指向的文件。</p>
-<h2 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h2><p>符号链接是一个文件的间接指针，符号链接与上文所述的硬链接不同，硬链接是直接指向文件的i节点，引入符号链接则主要是为了避开硬链接的一些限制；</p>
-<p>硬链接通常需要在同一文件系统</p>
-<p>只有超级管理员可以创建指向目录的硬链接</p>
-<p>符号链接则是没有这么多限制，任何用户均可以创建指向目录的链接，也可以分布于不同的文件系统，符号链接一般用于把整个文件或者目录移动到另外一个文件系统，</p>
-<p>在使用自函数调用文件链接时应该注意函数是否会跟随符号链接。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200521090635716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjAzMTIw,size_16,color_FFFFFF,t_70" style="zoom:67%;" /></p>
-<p>需要注意的是创建符号链接时可能会引入死循环（对于查找文件名的函数），比如在test目录下创建一个普通文件和一个指向test目录的符号链接，这样做机会引入死循环</p>
-<p>这样的bug是很容易消除的，因为unlink不会跟随符号链接，所以我们只要删除符号链接就ok了，但是如果是硬链接就会比较麻烦了，这也是为什么硬链接不允许创建目录链接的原因。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpathname, <span class="keyword">const</span> <span class="keyword">char</span> *newpathname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlinkat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldpathname, <span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *newpathname)</span></span>;</span><br><span class="line">													成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<p>通过以上两个函数我们可以创建一个指向oldpathname的符号链接newpathname，</p>
-<p>如果我们使用open函数打开一个符号链接，open函数会跟随到符号链接所指向的文件，但是如果这个文件不存在，则open函数会返回error</p>
-<p>那么我们想要读取符号链接的内容怎么办呢？有需求就有生产，我们可以使用符号链接读取函数</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *buf, <span class="keyword">ssize_t</span> bufsiz)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *buf, <span class="keyword">ssize_t</span> bufsiz)</span></span>;</span><br><span class="line">													成功返回读取的字节数，否则返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<p>两个函数集成了read open close 的所有操作，如果成功则返回读取的字节数。</p>
-]]></content>
-      <categories>
-        <category>APUE</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>APUE</tag>
       </tags>
   </entry>
   <entry>

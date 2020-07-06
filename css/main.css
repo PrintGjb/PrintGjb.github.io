@@ -1269,7 +1269,7 @@ img:hover {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff54d4;
+  background: #abffd0;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2701,14 +2701,14 @@ body {
   background-position: 50% 50%;
 }
 .content-wrap {
-  opacity: 0.85;
+  opacity: 0.83;
 }
 .sidebar {
-  opacity: 0.85;
+  opacity: 0.6;
 }
 .header-inner {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.6);
 }
 .popup {
-  opacity: 0.85;
+  opacity: 0.6;
 }
