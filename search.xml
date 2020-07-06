@@ -37,27 +37,6 @@
       </tags>
   </entry>
   <entry>
-    <title>修改0号中断程序</title>
-    <url>/2020/05/18/int0/</url>
-    <content><![CDATA[<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>任何一个CPU都有一种能力——在执行完成一个指令后检测从CPU内部或者外部传送过来的特殊信息，并立即对该信息进行处理，我们称这种特殊的信息为中断信息，<a id="more"></a>中断的意思是CPU不在继续执行正在执行的指令，转而去处理中断信息，这里所说的中断这是逻辑上的中断，并不是实际上的中断过程，只是便于理解。</p>
-<h2 id="内中断的产生"><a href="#内中断的产生" class="headerlink" title="内中断的产生"></a>内中断的产生</h2><p>那么CPU内部出现什么情况时才会产生中断信息呢？对于8086CPU内部出现以下4中情况时会产生中断信息</p>
-<ul>
-<li>除法错误</li>
-<li>单步执行</li>
-<li>执行into指令</li>
-<li>执行int指令</li>
-</ul>
-<p>那么既然有不同的事件会导致内部中断，那么对于每一种内部中断我们就都要有与之相对应的程序去处理这种中断事件，既然是不同的事件，那么我们如何区分这不同的事件呢？我们会把每一种中断事件分配一个一个字节的编号，也就是说共有256中表示中断，我们通过编号在中断向量表中寻找中断程序的入口地址，我们要做的就是自己写一个程序并且安装到安全的内存中去，接下来修改中断向量表中的地址，那么下一次程序出错时会自动调用我们的中断程序，其实很多病毒也是这样的设计思路，但是我们千万不要面向监狱编程啊！！！</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">entry:</span><br><span class="line">	mov ax, codesg</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov si, offset do0		;设置源地址</span><br><span class="line">	mov ax, 0</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov di, 0200h		;设置目标地址</span><br><span class="line">	</span><br><span class="line">	mov cx, offset do0end - offset do0  ;设置do0程序的长度</span><br><span class="line">	</span><br><span class="line">	cld					;设置正向传输</span><br><span class="line">	rep movsb</span><br><span class="line">	</span><br><span class="line">	mov word ptr es:[0 * 4], 0200H		;设置中断向量表</span><br><span class="line">	mov word ptr es:[0 * 4 + 2], 0000H</span><br><span class="line">	</span><br><span class="line">	mov ax, 4c00h</span><br><span class="line">	int 21h</span><br><span class="line">do0:</span><br><span class="line">	jmp short do0start</span><br><span class="line">	db &#39;haha~~~&#39;</span><br><span class="line">do0start:</span><br><span class="line">	mov ax, cs					; 设置字符串地址</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov si, 0202H</span><br><span class="line">	</span><br><span class="line">	mov ax, 0B800H				; 设置显存地址</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov di, 160 * 12 + 36 * 2</span><br><span class="line">	</span><br><span class="line">	mov cx, 7					;设置字符串长度</span><br><span class="line"></span><br><span class="line">s0:</span><br><span class="line">	mov al, [si]</span><br><span class="line">	mov es:[di], al				;将字符串写入显存</span><br><span class="line">	</span><br><span class="line">	mov byte ptr es:[di + 1], 2	;设置字符属性</span><br><span class="line">	</span><br><span class="line">	inc di</span><br><span class="line">	inc di</span><br><span class="line">	inc si</span><br><span class="line">	loop s0</span><br><span class="line">	</span><br><span class="line">	mov ax, 4c00h</span><br><span class="line">	int 21h</span><br><span class="line">	</span><br><span class="line">do0end:							;主要为了计算程序长度</span><br><span class="line">	nop</span><br><span class="line">codesg ends</span><br><span class="line">end entry</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>汇编</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>目录和文件的权限</title>
     <url>/2020/05/17/linux-mode/</url>
     <content><![CDATA[<h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>对于stat结构体中的st_mode中不仅仅包含了文件的类型也包含了文件的权限位，st_mode 是一个无符号的八进制数，对于Linux中的7种文件（普通文件、目录文件、块文件、特殊型字符文件、FIFO、套接字、符号链接）<a id="more"></a>均有访问权限，对于只有普通文件才有访问权限这样的认知是错误的，对于每一个文件共有九种权限</p>
@@ -179,6 +158,88 @@
       </tags>
   </entry>
   <entry>
+    <title>文件屏蔽字&amp;chmod解读</title>
+    <url>/2020/05/19/umask-chmod/</url>
+    <content><![CDATA[<p>上一篇blog 我们介绍了9种文件权限位，在这基础上我们介绍与每个进程相关联的文件模式创建屏蔽字</p>
+<h2 id="UMASK"><a href="#UMASK" class="headerlink" title="UMASK"></a>UMASK</h2><p>umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，<a id="more"></a>向3这样的函数还有listen（），，，后面会一一讲解</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">mode_t</span> <span class="title">umask</span><span class="params">(<span class="keyword">mode_t</span> cmask)</span></span>;</span><br><span class="line">														返回之前的文件模式创建屏蔽字</span><br></pre></td></tr></table></figure>
+<p>下面的案例讲解了umask函数的用法，我们不妨运行一下观察一下创建后文件的权限</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rwrwrw (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fd, n;</span><br><span class="line">	fd = creat(<span class="string">"test.txt"</span>, rwrwrw);</span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"create0 error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	umask(S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);</span><br><span class="line">	fd = creat(<span class="string">"test1.txt"</span>, rwrwrw);</span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"create1 error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么运行程序后我们不难发现，文件创建时需要的权限位被UMAK设置后则会被拒绝，这样我们可以通过设置umask的值来组织别人向你的文件写入内容</p>
+<h2 id="chomd-fchmod-fchmodat"><a href="#chomd-fchmod-fchmodat" class="headerlink" title="chomd     fchmod     fchmodat"></a>chomd     fchmod     fchmodat</h2><p>chmod     fchmod     fchmodat 三个函数主要是用于对文件权限的设置，</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chmod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmod</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmodat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line">													成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>这里面的mode在原有的九种文件权限位上又添加六种文件权限位，所以共有15种文件权限位</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRWXU</td>
+<td>用户可读可写可执行</td>
+</tr>
+<tr>
+<td>S_IRWXG</td>
+<td>组可读可写可执行</td>
+</tr>
+<tr>
+<td>S_IRWXO</td>
+<td>其他可续可执行</td>
+</tr>
+<tr>
+<td>S_ISUID</td>
+<td>执行时设置用户id</td>
+</tr>
+<tr>
+<td>S_ISGID</td>
+<td>执行时设置组id</td>
+</tr>
+<tr>
+<td>S_ISVTX</td>
+<td>保存文件粘着位</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这些文件权限位依然通过逻辑运算执行</p>
+<p>还记得我们上一章提到过struct stat buf-&gt;st_mode修改之后仅仅是修改了内存中的值并不会影响物理内存中的值，如需对物理内存操作需调用chmod</p>
+<p>这里我们通过以下程序来熟悉以下chmod</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	n = stat(<span class="string">"test.txt"</span>, &amp;buf);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"stat erro"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	n = chmod(<span class="string">"test.txt"</span>, (buf.st_mode &amp; ~S_IXGRP) | S_ISGID);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"chmod error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>APUE</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>APUE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修改0号中断程序</title>
+    <url>/2020/05/18/int0/</url>
+    <content><![CDATA[<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>任何一个CPU都有一种能力——在执行完成一个指令后检测从CPU内部或者外部传送过来的特殊信息，并立即对该信息进行处理，我们称这种特殊的信息为中断信息，<a id="more"></a>中断的意思是CPU不在继续执行正在执行的指令，转而去处理中断信息，这里所说的中断这是逻辑上的中断，并不是实际上的中断过程，只是便于理解。</p>
+<h2 id="内中断的产生"><a href="#内中断的产生" class="headerlink" title="内中断的产生"></a>内中断的产生</h2><p>那么CPU内部出现什么情况时才会产生中断信息呢？对于8086CPU内部出现以下4中情况时会产生中断信息</p>
+<ul>
+<li>除法错误</li>
+<li>单步执行</li>
+<li>执行into指令</li>
+<li>执行int指令</li>
+</ul>
+<p>那么既然有不同的事件会导致内部中断，那么对于每一种内部中断我们就都要有与之相对应的程序去处理这种中断事件，既然是不同的事件，那么我们如何区分这不同的事件呢？我们会把每一种中断事件分配一个一个字节的编号，也就是说共有256中表示中断，我们通过编号在中断向量表中寻找中断程序的入口地址，我们要做的就是自己写一个程序并且安装到安全的内存中去，接下来修改中断向量表中的地址，那么下一次程序出错时会自动调用我们的中断程序，其实很多病毒也是这样的设计思路，但是我们千万不要面向监狱编程啊！！！</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">entry:</span><br><span class="line">	mov ax, codesg</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov si, offset do0		;设置源地址</span><br><span class="line">	mov ax, 0</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov di, 0200h		;设置目标地址</span><br><span class="line">	</span><br><span class="line">	mov cx, offset do0end - offset do0  ;设置do0程序的长度</span><br><span class="line">	</span><br><span class="line">	cld					;设置正向传输</span><br><span class="line">	rep movsb</span><br><span class="line">	</span><br><span class="line">	mov word ptr es:[0 * 4], 0200H		;设置中断向量表</span><br><span class="line">	mov word ptr es:[0 * 4 + 2], 0000H</span><br><span class="line">	</span><br><span class="line">	mov ax, 4c00h</span><br><span class="line">	int 21h</span><br><span class="line">do0:</span><br><span class="line">	jmp short do0start</span><br><span class="line">	db &#39;haha~~~&#39;</span><br><span class="line">do0start:</span><br><span class="line">	mov ax, cs					; 设置字符串地址</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov si, 0202H</span><br><span class="line">	</span><br><span class="line">	mov ax, 0B800H				; 设置显存地址</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov di, 160 * 12 + 36 * 2</span><br><span class="line">	</span><br><span class="line">	mov cx, 7					;设置字符串长度</span><br><span class="line"></span><br><span class="line">s0:</span><br><span class="line">	mov al, [si]</span><br><span class="line">	mov es:[di], al				;将字符串写入显存</span><br><span class="line">	</span><br><span class="line">	mov byte ptr es:[di + 1], 2	;设置字符属性</span><br><span class="line">	</span><br><span class="line">	inc di</span><br><span class="line">	inc di</span><br><span class="line">	inc si</span><br><span class="line">	loop s0</span><br><span class="line">	</span><br><span class="line">	mov ax, 4c00h</span><br><span class="line">	int 21h</span><br><span class="line">	</span><br><span class="line">do0end:							;主要为了计算程序长度</span><br><span class="line">	nop</span><br><span class="line">codesg ends</span><br><span class="line">end entry</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>汇编</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>文件截断和链接</title>
     <url>/2020/05/20/truncate-link/</url>
     <content><![CDATA[<h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> lenght)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> lenght)</span></span></span><br><span class="line">    							成功返回0，出错返回-1</span><br></pre></td></tr></table></figure>
@@ -270,67 +331,6 @@
       <tags>
         <tag>汇编</tag>
         <tag>计算机基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件屏蔽字&amp;chmod解读</title>
-    <url>/2020/05/19/umask-chmod/</url>
-    <content><![CDATA[<p>上一篇blog 我们介绍了9种文件权限位，在这基础上我们介绍与每个进程相关联的文件模式创建屏蔽字</p>
-<h2 id="UMASK"><a href="#UMASK" class="headerlink" title="UMASK"></a>UMASK</h2><p>umask 函数为进程设置文件模式创建屏蔽字，并返回之前的值，umask也是少数没有出错返回值的函数，<a id="more"></a>向3这样的函数还有listen（），，，后面会一一讲解</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">mode_t</span> <span class="title">umask</span><span class="params">(<span class="keyword">mode_t</span> cmask)</span></span>;</span><br><span class="line">														返回之前的文件模式创建屏蔽字</span><br></pre></td></tr></table></figure>
-<p>下面的案例讲解了umask函数的用法，我们不妨运行一下观察一下创建后文件的权限</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rwrwrw (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fd, n;</span><br><span class="line">	fd = creat(<span class="string">"test.txt"</span>, rwrwrw);</span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"create0 error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	umask(S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);</span><br><span class="line">	fd = creat(<span class="string">"test1.txt"</span>, rwrwrw);</span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"create1 error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么运行程序后我们不难发现，文件创建时需要的权限位被UMAK设置后则会被拒绝，这样我们可以通过设置umask的值来组织别人向你的文件写入内容</p>
-<h2 id="chomd-fchmod-fchmodat"><a href="#chomd-fchmod-fchmodat" class="headerlink" title="chomd     fchmod     fchmodat"></a>chomd     fchmod     fchmodat</h2><p>chmod     fchmod     fchmodat 三个函数主要是用于对文件权限的设置，</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chmod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmod</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmodat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line">													成功返回<span class="number">0</span>，出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<p>这里面的mode在原有的九种文件权限位上又添加六种文件权限位，所以共有15种文件权限位</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>mode</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S_IRWXU</td>
-<td>用户可读可写可执行</td>
-</tr>
-<tr>
-<td>S_IRWXG</td>
-<td>组可读可写可执行</td>
-</tr>
-<tr>
-<td>S_IRWXO</td>
-<td>其他可续可执行</td>
-</tr>
-<tr>
-<td>S_ISUID</td>
-<td>执行时设置用户id</td>
-</tr>
-<tr>
-<td>S_ISGID</td>
-<td>执行时设置组id</td>
-</tr>
-<tr>
-<td>S_ISVTX</td>
-<td>保存文件粘着位</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>这些文件权限位依然通过逻辑运算执行</p>
-<p>还记得我们上一章提到过struct stat buf-&gt;st_mode修改之后仅仅是修改了内存中的值并不会影响物理内存中的值，如需对物理内存操作需调用chmod</p>
-<p>这里我们通过以下程序来熟悉以下chmod</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	n = stat(<span class="string">"test.txt"</span>, &amp;buf);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"stat erro"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	n = chmod(<span class="string">"test.txt"</span>, (buf.st_mode &amp; ~S_IXGRP) | S_ISGID);</span><br><span class="line">	<span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		perror(<span class="string">"chmod error"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>APUE</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>APUE</tag>
       </tags>
   </entry>
 </search>
